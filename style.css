@@ -80,8 +80,8 @@ body {
 }
 
 .card .infobox {
-    width: 500px;
-    height: 80%;
+    width: 600px;
+    height: 260px;
     margin: auto;
 }
 
@@ -186,8 +186,14 @@ body {
 
 .social {
     position: relative;
-    top: -25px;
     margin-left: 15px;
+    top: -25px;
+}
+
+.social-bottom {
+    position: relative;
+    margin-left: 15px;
+    top: -50px;
 }
 
 .social:hover {
