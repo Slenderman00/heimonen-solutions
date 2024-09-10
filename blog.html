@@ -89,11 +89,10 @@
         setTimeout(function () {
             if (window.location.hash) {
                 var hash = window.location.hash.substring(1);
-                hash = hash.replace('_', ' ');
+                hash = hash.replaceAll('_', ' ');
                 var elements = document.getElementsByClassName("index-item-title");
                 for (var i = 0; i < elements.length; i++) {
-                    console.log(elements[i].innerHTML.trim());
-                    if (elements[i].innerHTML == hash) {
+                    if (elements[i].innerHTML.toLowerCase() == hash.toLocaleLowerCase()) {
                         elements[i].scrollIntoView();
                         elements[i].click();
                     }
