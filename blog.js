@@ -1,5 +1,3 @@
-let imageMap = [];
-
 class Post {
     constructor(title, description, data, tags, date) {
         this.title = title;
@@ -40,7 +38,7 @@ class Post {
         blogPost.appendChild(titleAndDate);
         blogPost.appendChild(indexItemDescription);
 
-        if(this.tags.length > 0) {
+        if (this.tags.length > 0) {
             let indexItemTags = document.createElement("div");
             indexItemTags.className = "index-item-tags";
 
@@ -82,15 +80,6 @@ class Post {
                 }
             });
 
-            setTimeout(function () {
-                for (let item of imageMap) {
-                    let image = document.getElementById(item.id);
-                    if (image) {
-                        image.src = item.url;
-                    }
-                }
-            }, 100);
-
             //toggle the expanded class on the clicked post
             blogPost.classList.toggle("expanded");
             blogPost.classList.toggle("hoverable");
@@ -111,7 +100,8 @@ class Post {
 }
 
 class RichText {
-    constructor(data) {
+    constructor(data, includes) {
+        this.includes = includes
         this.data = data;
         this.mother = document.createElement("div");
     }
@@ -217,9 +207,26 @@ class RichText {
                 parent.appendChild(hyperlink);
                 break;
             case "embedded-asset-block":
-                let image = document.createElement("img");
-                image.id = item.data.id;
-                parent.appendChild(image);
+                let asset = this.includes.Asset.find(asset => asset.sys.id === item.data.target.sys.id);
+                if (asset && asset.fields.file.contentType.includes('image')) {
+                    let image = document.createElement("img");
+                    image.src = "https:" + asset.fields.file.url;
+                    image.style.maxWidth = "100%";
+                    image.style.height = "auto";
+                    image.id = item.data.id;
+                    parent.appendChild(image);
+                } else if (asset && asset.fields.file.contentType.includes('video')) {
+                    let video = document.createElement("video");
+                    video.controls = true;
+                    let source = document.createElement("source");
+                    source.src = "https:" + asset.fields.file.url;
+                    source.type = asset.fields.file.contentType;
+                    video.appendChild(source);
+                    video.style.maxWidth = "100%";
+                    video.style.height = "auto";
+                    video.id = item.data.id;
+                    parent.appendChild(video);
+                }
                 break;
             case "blockquote":
                 let blockquote = document.createElement("blockquote");
@@ -232,7 +239,7 @@ class RichText {
             case "hr":
                 let hr = document.createElement("hr");
                 parent.appendChild(hr);
-                break;    
+                break;
             default:
                 console.log(item);
                 break;
@@ -240,30 +247,12 @@ class RichText {
     }
 
     parse() {
-        for(let item of this.data) {
-            if (item.nodeType == "embedded-asset-block") {
-                let id = "image-" + item.data.target.sys.id;
-                item.data.id = id;
-                fetchImage(item.data.target.sys.id).then(function (url) {
-                    imageMap.push({ id: id, url: "https:" + url });
-                });
-            }
-        }
-
         for (let item of this.data) {
             this.parseItem(item, this.mother);
         }
         //console.log(this.data);
         return this.mother.innerHTML;
     }
-}
-
-let fetchImage =  async (id) => {
-    //fetch("https://cdn.contentful.com/spaces/030xzm76gl6f/environments/master/assets/" + id + "?access_token=2qct9J11QIyz6eGjuZTY5arti-xqpvC8803H0PvfTyE")
-    let response = await fetch("https://cdn.contentful.com/spaces/030xzm76gl6f/environments/master/assets/" + id + "?access_token=2qct9J11QIyz6eGjuZTY5arti-xqpvC8803H0PvfTyE");
-    let json = await response.json();
-    //console.log(json);
-    return json.fields.file.url;
 }
 
 let addPosts = (container) => {
@@ -279,7 +268,7 @@ let addPosts = (container) => {
             let title = item.fields.title;
             let description = item.fields.description;
             //data is rtf so we need to parse it
-            rtf = new RichText(item.fields.content.content);
+            rtf = new RichText(item.fields.content.content, json.includes);
             let data = rtf.parse();
 
             let tags = item.fields.tags;

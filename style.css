@@ -142,6 +142,7 @@ body {
 }
 
 .blog-item.expanded {
+    overflow-y: scroll;
     max-height: 1500px!important;
 }
 
