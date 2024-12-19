@@ -29,11 +29,15 @@ initBackground = () => {
         worker.postMessage({mouse: null, click: false, canvas: canvas }, [canvas]);
     
         document.getElementById("canvas").addEventListener("click", function(e) {
-            worker.postMessage({mouse: null, click: true, canvas: null });
+            if (e.target.tagName !== 'BUTTON') {
+                worker.postMessage({mouse: null, click: true, canvas: null });
+            }
         });
-    
+        
         document.getElementsByClassName("center")[0].addEventListener("click", function(e) {
-            worker.postMessage({mouse: null, click: true, canvas: null });
+            if (e.target.tagName !== 'BUTTON') {
+                worker.postMessage({mouse: null, click: true, canvas: null });
+            }
         });
     
         worker.onmessage = (e) => {

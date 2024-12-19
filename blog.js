@@ -58,6 +58,10 @@ class Post {
         let description = this.description;
 
         blogPost.onclick = function (event) {
+            if (event.target.tagName === "BUTTON") {
+                window.open(event.target.dataset.url, '_blank');
+            }
+
             //if the current post is already expanded, do nothing
             if (blogPost.classList.contains("expanded")) {
                 return;
@@ -226,6 +230,23 @@ class RichText {
                     video.style.height = "auto";
                     video.id = item.data.id;
                     parent.appendChild(video);
+                } else if (asset && asset.fields.file.contentType.includes('application/pdf')) {
+                    let button = document.createElement("button");
+                    
+                    // Get PDF title from asset fields
+                    const pdfTitle = asset.fields.title || "View PDF";
+                    
+                    button.className = 'pdf-button';
+                    button.innerHTML = `
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M14,2L20,8V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H14M18,20V9H13V4H6V20H18M10.92,12.31C10.68,11.54 10.15,9.08 11.55,9.04C12.95,9 12.03,12.16 12.03,12.16C12.42,13.65 14.05,14.72 14.05,14.72C14.55,14.57 17.4,14.24 17,15.72C16.57,17.2 13.5,15.81 13.5,15.81C11.55,15.95 10.09,16.47 10.09,16.47C8.96,18.58 7.64,19.5 7.1,19.1C6.43,18.5 7.87,16.64 7.87,16.64C8.5,15.55 9.42,14.03 9.42,14.03C10.39,13.11 10.92,12.31 10.92,12.31M11.97,13.34C11.67,12.96 11.63,11.76 11.63,11.76C11.63,11.76 11.51,10.97 12,11.24C12.57,11.57 12.07,12.53 11.97,13.34M13.97,15.06C13.97,15.06 15.5,15.81 15.77,15.45C16.04,15.09 13.94,15.06 13.97,15.06M8.65,17.17C8.65,17.17 8.2,17.54 8.37,17.84C8.54,18.14 9.37,16.95 8.65,17.17M10.32,15.45C10.32,15.45 11.2,15.11 12.23,15.06C11.61,14.76 10.8,14.43 10.32,15.45Z"/>
+                        </svg>
+                        ${pdfTitle}
+                    `;
+                    
+                
+                    button.dataset.url = "https:" + asset.fields.file.url;
+                    parent.appendChild(button);
                 }
                 break;
             case "blockquote":
