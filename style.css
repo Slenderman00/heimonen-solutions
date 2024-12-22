@@ -1,6 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
+html {
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -264,32 +271,4 @@ body {
 .pdf-button:hover {
     background-color: #000000;
     color: #FFFAFA;
-}
-
-p {
-    font-size: 16px !important;
-}
-
-h1 {
-    font-size: 32px !important;
-}
-
-h2 {
-    font-size: 24px !important;
-}
-
-h3 {
-    font-size: 20px !important;
-}
-
-h4 {
-    font-size: 18px !important;
-}
-
-h5 {
-    font-size: 16px !important;
-}
-
-h6 {
-    font-size: 14px !important;
 }
