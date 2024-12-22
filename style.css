@@ -267,29 +267,29 @@ body {
 }
 
 p {
-    font-size: 1rem;
+    font-size: 16px !important;
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 32px !important;
 }
 
 h2 {
-    font-size: 1.5rem;
+    font-size: 24px !important;
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: 20px !important;
 }
 
 h4 {
-    font-size: 1.125rem;
+    font-size: 18px !important;
 }
 
 h5 {
-    font-size: 1rem;
+    font-size: 16px !important;
 }
 
 h6 {
-    font-size: 0.875rem;
+    font-size: 14px !important;
 }
