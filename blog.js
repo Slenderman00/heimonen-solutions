@@ -139,7 +139,7 @@ class RichText {
                 parent.appendChild(text);
                 break;
             case "paragraph":
-                let paragraph = document.createElement("p");
+                let paragraph = document.createElement("h4");
                 for (let subItem of item.content) {
                     //console.log(subItem);
                     this.parseItem(subItem, paragraph);
