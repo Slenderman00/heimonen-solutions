@@ -122,12 +122,12 @@ body {
 .blog-item {
     color: black;
     background-color: #FFFAFA;
-    max-height: 80px;
+    /*max-height: 80px;*/
+    height: 80px;
     margin: 20px;
     padding: 20px;
     border-radius: 5px;
     overflow: hidden;
-    transition: max-height 1s ease;
 }
 
 .blog-item .underline {
@@ -151,7 +151,8 @@ body {
 
 .blog-item.expanded {
     overflow-y: scroll;
-    max-height: 90vh!important;
+    height: auto;
+    /*max-height: 90vh!important;*/
 }
 
 .blog-item.hoverable:hover {

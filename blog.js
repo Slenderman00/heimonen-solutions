@@ -61,46 +61,79 @@ class Post {
             if (event.target.tagName === "BUTTON") {
                 window.open(event.target.dataset.url, '_blank');
             }
-
+        
             //if the current post is already expanded, do nothing
             if (blogPost.classList.contains("expanded")) {
                 return;
             }
-
+        
             //prevent the event from propagating to the body
             event.stopPropagation();
-
+        
             //close any previously opened posts
             let expandedPosts = document.querySelectorAll(".blog-item.expanded");
-
+        
             expandedPosts.forEach(function (post) {
                 if (post !== blogPost) {
-                    post.classList.remove("expanded");
-                    post.classList.add("hoverable");
-                    let description = post.querySelector(".index-item-description");
-                    setTimeout(function () {
+                    animateHeight(post, post.scrollHeight, 80, 500, () => {
+                        post.classList.remove("expanded");
+                        post.classList.add("hoverable");
+                        let description = post.querySelector(".index-item-description");
                         description.innerHTML = description.dataset.originalContent;
-                    }, 1000);
+                    });
                 }
             });
-
+        
             //toggle the expanded class on the clicked post
-            blogPost.classList.toggle("expanded");
-            blogPost.classList.toggle("hoverable");
-
-            //update the content based on the state
             if (blogPost.classList.contains("expanded")) {
-                indexItemDescription.innerHTML = data;
+                indexItemDescription.innerHTML = description;
+                animateHeight(blogPost, blogPost.scrollHeight, 80, 500, () => {
+                    blogPost.classList.remove("expanded");
+                    blogPost.classList.add("hoverable");
+                });
             } else {
-                setTimeout(function () {
-                    indexItemDescription.innerHTML = description;
-                }, 500);
+                let startHeight = blogPost.scrollHeight;
+                blogPost.style.height = startHeight + 'px';
+                blogPost.classList.add("expanded");
+                blogPost.classList.remove("hoverable");
+                indexItemDescription.innerHTML = data;
+                setTimeout(() => {
+                    animateHeight(blogPost, 80, blogPost.scrollHeight, 500, () => {
+                        blogPost.style.height = 'auto';
+                    });
+                }, 0);
             }
         };
 
 
         return blogPost;
     }
+}
+
+function animateHeight(element, startHeight, endHeight, duration, callback) {
+    let startTime = null;
+
+    function animation(currentTime) {
+        if (!startTime) startTime = currentTime;
+        let timeElapsed = currentTime - startTime;
+        let run = ease(timeElapsed, startHeight, endHeight - startHeight, duration);
+        element.style.height = run + 'px';
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        } else {
+            element.style.height = endHeight + 'px';
+            if (callback) callback();
+        }
+    }
+
+    function ease(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    requestAnimationFrame(animation);
 }
 
 class RichText {
