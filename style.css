@@ -274,3 +274,15 @@ body {
     background-color: #000000;
     color: #FFFAFA;
 }
+
+.bluesky {
+    background-image: url('bluesky-1.svg');
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    color: #000000;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle; 
+}
