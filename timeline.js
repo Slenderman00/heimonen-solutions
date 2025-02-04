@@ -360,7 +360,7 @@ loadTimeline = () => {
         new Event(1664579401, 1677629401, "#838381", "Hotshot", "Developed custom boat electronics for the sailing boat Hotshot", ["NodeJS", "JS", "HTML", "CSS", "C", "C++", "Python", "Raspberry Pi", "ESP32"], url="https://www.instagram.com/hotshotracing/?img_index=1"),
         new Event(1651360201, 1651360201, "#494949", "Jokermann 2", "Develped custom boat electronics for the Norwegian TP52 Jokermannen 2", []),
         new Event(1596237001, 1672531801, "#838381", "UiT", "Worked as a technician developing and maintaining the university of Tromsø's digital tools", ["Python", "Django", "PostgresSQL", "JS", "HTML", "CSS"]),
-        new Event(1672531801, currentDate.getTime() / 1000, "#838381", "UiT", "The university promoted me to a department engineer", ["Python", "Django", "PostgresSQL", "JS", "HTML", "CSS"]),
+        new Event(1672531801, 1735655013, "#838381", "UiT", "The university promoted me to a department engineer", ["Python", "Django", "PostgresSQL", "JS", "HTML", "CSS", "PaloAlto"]),
         new Event(1451607001, 1560640201, "#838381", "High School", "Finished high school at the Oslo Cathedral school", []),
         new Event(1560640201, 1577837401, "#838381", "Finnish Navy", "As a finnish citizen i did my obligatory millitary service as a coastal jeager with a specialization in communication technologies", []),
         new Event(1577837401, 1640995801, "#838381", "UiT", "Studied computer science at the univeristy of Tromsø", []),
