@@ -111,12 +111,16 @@
     <script>
         loadBackground();
 
-        window.onscroll = function() {
-            localStorage.setItem("scrollPosition", window.scrollY);
-        }
+        setTimeout(()=> {
+            window.onscroll = function() {
+                localStorage.setItem("scrollPosition", window.scrollY);
+                console.log(window.scrollY)
+            }
+        }, 1000)
 
         function scrollToSavedPosition() {
-        const savedPosition = localStorage.getItem("scrollPosition");
+            const savedPosition = localStorage.getItem("scrollPosition");
+            console.log(savedPosition)
             if (savedPosition) {
                 window.scrollTo(0, savedPosition);
             }
@@ -131,7 +135,7 @@
                 elements[0].click();
                 setTimeout(() => {
                     scrollToSavedPosition();
-                }, 1000)
+                }, 500)
             });
 
             pollContentful(hash)
