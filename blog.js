@@ -379,3 +379,37 @@ let addPreview = (container, key, callback) => {
         callback()
     });
 }
+
+let pollContentful = (key) => {
+    let lastPosts = JSON.parse(localStorage.getItem('lastPosts')) || [];
+  
+    const checkForChanges = () => {
+      if (lastPosts.length === 0) return;
+  
+      fetch(`https://preview.contentful.com/spaces/030xzm76gl6f/environments/master/entries?access_token=${key}`)
+        .then(response => response.json())
+        .then(json => {
+          let currentPosts = json.items.map(item => ({
+            id: item.sys.id,
+            title: item.fields.title,
+            description: item.fields.description,
+            date: item.sys.createdAt,
+          }));
+  
+          console.log(JSON.stringify(currentPosts) !== JSON.stringify(lastPosts));
+          if (JSON.stringify(currentPosts) !== JSON.stringify(lastPosts)) {
+            lastPosts = currentPosts;
+            localStorage.setItem('lastPosts', JSON.stringify(lastPosts));
+  
+            location.reload();
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching Contentful posts:', error);
+        });
+    };
+  
+    setInterval(checkForChanges, 1000);
+  };
+  
+  
