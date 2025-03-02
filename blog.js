@@ -342,3 +342,40 @@ let addPosts = (container) => {
         }
     });
 }
+
+let addPreview = (container, key, callback) => {
+    let posts = [];
+
+    //fetch posts https://cdn.contentful.com/spaces/{space_id}/environments/{environment_id}/entries?access_token={access_token}
+    fetch(`https://preview.contentful.com/spaces/030xzm76gl6f/environments/master/entries?access_token=${key}`).then(function (response) {
+        return response.json();
+    }).then(function (json) {
+
+        console.log(json);
+        for (let item of json.items) {
+            try {
+                let title = item.fields.title;
+                let description = item.fields.description;
+                //data is rtf so we need to parse it
+                rtf = new RichText(item.fields.content.content, json.includes);
+                let data = rtf.parse();
+
+                let tags = item.fields.tags;
+
+                let date = new Date(item.sys.createdAt).getTime() / 1000;
+
+                posts.push(new Post(title, description, data, tags, date));
+            } catch {}
+        }
+
+        posts.sort(function (a, b) {
+            return b.date - a.date;
+        });
+
+        for (let post of posts) {
+            container.appendChild(post.getHTML());
+        }
+
+        callback()
+    });
+}

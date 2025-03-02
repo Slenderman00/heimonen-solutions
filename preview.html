@@ -1,0 +1,128 @@
+<!--
+    Shitty portfolio website V2
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css"
+        integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                macros: {
+                    // Custom macros (if needed)
+                    Liquidity: ['\\text{Liquidity}'],
+                    normalized: ['\\text{normalized}'],
+                    current: ['\\text{current}'],
+                    previous: ['\\text{previous}']
+                }
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="blog.js"></script>
+    <script src="background.js"></script>
+    <title>Joar Heimonen</title>
+</head>
+
+<body>
+
+    <div id="canvas-container">
+        <canvas id="canvas" width="3840" height="2160"></canvas>
+    </div>
+
+    <div class="center">
+        <div class="card">
+            <div class="card-title">
+                <center>
+                    Joar Heimonen
+                </center>
+            </div>
+            <div class="card-navbar">
+                <div class="navbar-item">
+                    <a href="index.html">
+                        Home
+                    </a>
+                </div>
+                <div class="navbar-item selected">
+                    <a href="blog.html">
+                        Blog
+                    </a>
+                </div>
+            </div>
+            <div class="card-content">
+                <img src="https://avatars.githubusercontent.com/u/24755365?v=4" alt="" class="round-image inline">
+                <div class="inline infobox">
+                    <p>
+                    <h2>About me:</h2>
+                    </p>
+                    <p>
+                        I'm a 24 year old developer from Oslo. I'm interested in programming, and electronics.
+                    </p>
+                    <p>
+                    <h2>Socials:</h2>
+                    <div class="social inline">
+                        <a href="https://github.com/Slenderman00">
+                            <h2>
+                                <i class="fa fa-github" aria-hidden="true"></i>
+                                <element id="github">Github</element>
+                            </h2>
+                        </a>
+                    </div>
+                    <div class="social inline">
+                        <a href="https://matrix.to/#/@joar:matrix.joar.me">
+                            <h2>
+                                <i class="fa fa-matrix-org" aria-hidden="true"></i>
+                                <element id="matrix">@Joar:matrix.joar.me</element>
+                            </h2>
+                        </a>
+                    </div>
+                    <div class="social-bottom inline">
+                        <a href="mailto://contact@joar.me">
+                            <h2>
+                                <i class="fa fa-envelope" aria-hidden="true"></i> Contact@joar.me
+                            </h2>
+                        </a>
+                    </div>
+                    <div class="social-bottom inline">
+                        <a href="https://bsky.app/profile/joar.me">
+                            <h2>
+                                <i class="bluesky"></i> @Joar.me
+                            </h2>
+                        </a>
+                    </div>
+                    </p>
+                </div>
+            </div>
+            <div id="index-container">
+            </div>
+        </div>
+    </div>
+    <script>
+        loadBackground();
+
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            addPreview(document.getElementById("index-container"), hash, () => {
+                var elements = document.getElementsByClassName("index-item-title");
+
+                elements[0].scrollIntoView();
+                elements[0].click();
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>
