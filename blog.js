@@ -103,6 +103,8 @@ class Post {
                     });
                 }, 0);
             }
+
+            MathJax.typesetPromise()
         };
 
 
