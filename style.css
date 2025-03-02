@@ -151,7 +151,7 @@ body {
 }
 
 .blog-item.expanded {
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     height: auto;
     /*max-height: 90vh!important;*/
 }
