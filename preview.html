@@ -111,13 +111,27 @@
     <script>
         loadBackground();
 
+        window.onscroll = function() {
+            localStorage.setItem("scrollPosition", window.scrollY);
+        }
+
+        function scrollToSavedPosition() {
+        const savedPosition = localStorage.getItem("scrollPosition");
+            if (savedPosition) {
+                window.scrollTo(0, savedPosition);
+            }
+        }
+
+
         if (window.location.hash) {
             var hash = window.location.hash.substring(1);
             addPreview(document.getElementById("index-container"), hash, () => {
                 var elements = document.getElementsByClassName("index-item-title");
 
-                elements[0].scrollIntoView();
                 elements[0].click();
+                setTimeout(() => {
+                    scrollToSavedPosition();
+                }, 1000)
             });
 
             pollContentful(hash)
