@@ -389,14 +389,8 @@ let pollContentful = (key) => {
       fetch(`https://preview.contentful.com/spaces/030xzm76gl6f/environments/master/entries?access_token=${key}`)
         .then(response => response.json())
         .then(json => {
-          let currentPosts = json.items.map(item => ({
-            id: item.sys.id,
-            title: item.fields.title,
-            description: item.fields.description,
-            date: item.sys.createdAt,
-          }));
+          let currentPosts = json.items.map(item => (item.fields));
   
-          console.log(JSON.stringify(currentPosts) !== JSON.stringify(lastPosts));
           if (JSON.stringify(currentPosts) !== JSON.stringify(lastPosts)) {
             lastPosts = currentPosts;
             localStorage.setItem('lastPosts', JSON.stringify(lastPosts));
