@@ -104,7 +104,8 @@ class Post {
                 }, 0);
             }
 
-            MathJax.typesetPromise()
+            MathJax.typesetPromise();
+            hljs.highlightAll();
         };
 
 
@@ -151,6 +152,8 @@ class RichText {
                 //console.log(item.value);
                 let text = document.createElement("span");
 
+                let code = false;
+
                 //go trough item marks and check for underline, bold, italic, code
                 for (let mark of item.marks) {
                     switch (mark.type) {
@@ -164,14 +167,23 @@ class RichText {
                             text.classList.add("italic");
                             break;
                         case "code":
-                            text = document.createElement("pre");
-                            text.classList.add("code");
+                            code = true;
+                            text = document.createElement("code");
                             break;
                     }
                 }
+
                 text.innerHTML = item.value;
 
+                if (code) {
+                    let pre = document.createElement("pre");
+                    pre.classList.add("code");
+                    pre.appendChild(text);
+                    text = pre;
+                }
+
                 parent.appendChild(text);
+
                 break;
             case "paragraph":
                 let paragraph = document.createElement("P");
