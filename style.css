@@ -143,11 +143,11 @@ body {
     text-shadow: 0.5px 0.5px 0.5px #000000;
 }
 
-.blog-item .code {
+pre.code code {
     padding: 10px;
     border-radius: 5px;
-    background-color: #d4d4d4;
     font-family: 'Roboto Mono', monospace;
+    background-color: #0A0908;
 }
 
 .blog-item.expanded {
