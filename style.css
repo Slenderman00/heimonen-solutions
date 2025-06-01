@@ -286,3 +286,57 @@ pre.code code {
     background-position: center;
     vertical-align: middle; 
 }
+
+pre.mermaid {
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace;
+    background-color: #0A0908;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+pre.mermaid .node rect {
+  fill: #44475a;
+  stroke: #6272a4;
+}
+
+pre.mermaid .node text {
+  fill: #f8f8f2;
+}
+
+pre.mermaid .edgeLabel {
+  background-color: #44475a;
+  border: 1px solid #6272a4;
+  color: #f8f8f2;
+}
+
+pre.mermaid .label {
+  fill: #f8f8f2;
+}
+
+pre.mermaid .arrowheadPath {
+  fill: #ff79c6;
+}
+
+pre.mermaid .edgePath {
+  stroke: #8be9fd;
+}
+
+pre.mermaid .cluster rect {
+  fill: #44475a;
+  stroke: #6272a4;
+}
+
+pre.mermaid .edgeLabel {
+  background-color: transparent;
+  border: none;
+  color: #f8f8f2;
+}
+
+pre.mermaid .cluster text {
+  fill: #f8f8f2;
+}

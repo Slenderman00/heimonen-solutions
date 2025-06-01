@@ -5,6 +5,38 @@
 <html>
 
 <head>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        
+        window.mermaid = mermaid; 
+
+        window.mermaid.initialize({
+            theme: 'base',
+            themeVariables: {
+                background: '#282a36',
+                textColor: '#f8f8f2',
+                primaryColor: '#44475a',
+                primaryTextColor: '#f8f8f2',
+                primaryBorderColor: '#6272a4',
+                secondaryColor: '#6272a4',
+                secondaryTextColor: '#f8f8f2',
+                secondaryBorderColor: '#6272a4',
+                tertiaryColor: '#44475a',
+                tertiaryTextColor: '#f8f8f2',
+                tertiaryBorderColor: '#6272a4',
+                lineColor: '#8be9fd',
+                arrowheadColor: '#ff79c6',
+                edgeLabelBackground: '#44475a',
+                highlightColor: '#50fa7b',
+                fontFamily: 'Roboto Mono, monospace',
+                titleColor: '#50fa7b',
+                nodeTextColor: '#f8f8f2',
+                labelBoxBackground: '#44475a',
+                labelBoxBorderColor: '#6272a4',
+            },
+        });
+    </script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css"
         integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
 
@@ -113,7 +145,11 @@
     </div>
     <script>
         loadBackground();
-        addPosts(document.getElementById("index-container"));
+        addPosts(document.getElementById("index-container"), () => {
+            MathJax.typesetPromise();
+            hljs.highlightAll();
+            window.mermaid.contentLoaded();
+        });
 
         setTimeout(function () {
             if (window.location.hash) {

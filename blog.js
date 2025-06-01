@@ -1,10 +1,12 @@
 class Post {
-    constructor(title, description, data, tags, date) {
+    constructor(title, description, data, tags, date, openPostCallback) {
         this.title = title;
         this.description = description;
         this.data = data;
         this.tags = tags;
         this.date = date;
+
+        this.openPostCallback = openPostCallback;
     }
 
     getHTML() {
@@ -57,7 +59,7 @@ class Post {
         let data = this.data;
         let description = this.description;
 
-        blogPost.onclick = function (event) {
+        blogPost.onclick = (event) => {
             if (event.target.tagName === "BUTTON") {
                 window.open(event.target.dataset.url, '_blank');
             }
@@ -103,9 +105,8 @@ class Post {
                     });
                 }, 0);
             }
-
-            MathJax.typesetPromise();
-            hljs.highlightAll();
+            
+            this.openPostCallback();
         };
 
 
@@ -167,8 +168,14 @@ class RichText {
                             text.classList.add("italic");
                             break;
                         case "code":
-                            code = true;
-                            text = document.createElement("code");
+                            text = document.createElement("pre");
+                            if(item.value.includes("mermaid")) {
+                                item.value = item.value.replace("mermaid", "");
+                                text.classList.add("mermaid");
+                            } else {
+                                code = true;
+                                text = document.createElement("code");
+                            }
                             break;
                     }
                 }
@@ -323,7 +330,7 @@ class RichText {
     }
 }
 
-let addPosts = (container) => {
+let addPosts = (container, openPostCallback) => {
     let posts = [];
 
     //fetch posts https://cdn.contentful.com/spaces/{space_id}/environments/{environment_id}/entries?access_token={access_token}
@@ -343,7 +350,7 @@ let addPosts = (container) => {
 
             let date = new Date(item.sys.createdAt).getTime() / 1000;
 
-            posts.push(new Post(title, description, data, tags, date));
+            posts.push(new Post(title, description, data, tags, date, openPostCallback));
         }
         posts.sort(function (a, b) {
             return b.date - a.date;
@@ -355,7 +362,7 @@ let addPosts = (container) => {
     });
 }
 
-let addPreview = (container, key, callback) => {
+let addPreview = (container, key, callback, openPostCallback) => {
     let posts = [];
 
     //fetch posts https://cdn.contentful.com/spaces/{space_id}/environments/{environment_id}/entries?access_token={access_token}
@@ -376,7 +383,7 @@ let addPreview = (container, key, callback) => {
 
                 let date = new Date(item.sys.createdAt).getTime() / 1000;
 
-                posts.push(new Post(title, description, data, tags, date));
+                posts.push(new Post(title, description, data, tags, date, openPostCallback));
             } catch {}
         }
 
