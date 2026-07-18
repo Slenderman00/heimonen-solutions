@@ -1,96 +1,217 @@
 <!--
-    Shitty portfolio website V2
+    Heimonen Solutions AS
 -->
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
-
-        <link rel="icon" type="image/png" href="favicon.png"/>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="hs-favicon.png"/>
         <link rel="stylesheet" href="style.css"/>
-        <script src="background.js"></script>
-        <script src="timeline.js"></script>
-        <script src="onload.js"></script>
-        <title>Joar Heimonen</title>
+        <script src="hs-background.js"></script>
+        <title>Heimonen Solutions</title>
     </head>
-    <body>
+    <body class="hs">
 
         <div id="canvas-container">
-            <canvas 
+            <canvas
                 id="canvas"
                 width="3840"
                 height="2160"
             ></canvas>
         </div>
 
-        <div class="center">
-            <div class="card">
-                <div class="card-title">
-                    <center>
-                        Joar Heimonen
-                    </center>
+        <div class="hs-page">
+
+            <nav class="hs-nav">
+                <div class="hs-nav-mark">Heimonen Solutions</div>
+                <div class="hs-nav-links">
+                    <a href="#services">SERVICES</a>
+                    <a href="#clients">CLIENTS</a>
+                    <a href="#lab">LAB</a>
+                    <a href="#contact">CONTACT</a>
                 </div>
-                <div class="card-navbar">
-                    <div class="navbar-item selected">
-                        <a href="index.html">
-                            Home
-                        </a>
+            </nav>
+
+            <header class="hs-hero">
+                <div class="hs-eyebrow">HEIMONEN SOLUTIONS AS &mdash; OSLO, NORWAY</div>
+                <h1 class="hs-headline">We design circuits, write firmware, and build distributed systems.</h1>
+                <p class="hs-subhead">Heimonen Solutions AS is a research and development consultancy. We take on hardware and software projects that most consultancies don't.</p>
+                <div class="hs-capabilities">
+                    <span>R&amp;D</span>
+                    <span>SYSTEMS ARCHITECTURE</span>
+                    <span>SOFTWARE</span>
+                    <span>PCB DESIGN</span>
+                    <span>FIRMWARE</span>
+                    <span>NETWORKING</span>
+                    <span>REPAIR</span>
+                </div>
+            </header>
+
+            <section id="services" class="hs-services">
+                <div class="hs-section-inner">
+                    <h2 class="hs-section-title">What we do</h2>
+                    <div class="hs-services-grid">
+                        <div class="hs-service">
+                            <div class="hs-service-num">01</div>
+                            <div class="hs-service-title">Research &amp; development</div>
+                            <div class="hs-service-desc">Applied research, experimentation and prototyping, from first-principles investigation to a working proof of concept.</div>
+                        </div>
+                        <div class="hs-service">
+                            <div class="hs-service-num">02</div>
+                            <div class="hs-service-title">Diagnostics, repair &amp; reverse engineering</div>
+                            <div class="hs-service-desc">Component-level fault finding, reverse engineering and repair of equipment that is undocumented, unsupported or difficult to replace.</div>
+                        </div>
+                        <div class="hs-service">
+                            <div class="hs-service-num">03</div>
+                            <div class="hs-service-title">Circuit design &amp; PCB layout</div>
+                            <div class="hs-service-desc">Schematics and layouts for custom electronics, from early prototypes to boards designed for production.</div>
+                        </div>
+                        <div class="hs-service">
+                            <div class="hs-service-num">04</div>
+                            <div class="hs-service-title">Embedded firmware</div>
+                            <div class="hs-service-desc">Bare-metal and RTOS firmware written against the actual hardware, datasheets and constraints of the system.</div>
+                        </div>
+                        <div class="hs-service">
+                            <div class="hs-service-num">05</div>
+                            <div class="hs-service-title">Software &amp; platforms</div>
+                            <div class="hs-service-desc">Backend services, operator tools and infrastructure that connect devices, data and people in the field.</div>
+                        </div>
+                        <div class="hs-service">
+                            <div class="hs-service-num">06</div>
+                            <div class="hs-service-title">Networking &amp; data plane</div>
+                            <div class="hs-service-desc">Networked systems, protocols and performance-sensitive data paths, down to the packet level when it matters.</div>
+                        </div>
+                        <div class="hs-service hs-service-wide">
+                            <div class="hs-service-num">07</div>
+                            <div class="hs-service-title">Systems architecture</div>
+                            <div class="hs-service-desc hs-service-desc-wide">End-to-end system design across electronics, firmware, software, networking and operations, whether the system is being built from scratch or extended in place.</div>
+                        </div>
                     </div>
-                    <div class="navbar-item">
-                        <a href="blog.html">
-                            Blog
-                        </a>
+                </div>
+            </section>
+
+            <section id="clients" class="hs-clients">
+                <div class="hs-section-inner hs-clients-heading">
+                    <h2 class="hs-section-title">Clients</h2>
+                </div>
+
+                <div class="hs-section-inner">
+                    <div class="hs-client">
+                        <div class="hs-client-left">
+                            <div class="hs-client-name">Lift Ocean</div>
+                            <div class="hs-client-status">MARINE</div>
+                        </div>
+                        <div class="hs-client-right">
+                            <div class="hs-client-desc">PCB design and firmware for foiling boats. Marine electronics designed for salt water, vibration, and continuous operation at sea.</div>
+                            <div class="hs-client-tags">
+                                <span class="hs-tag">PCB design</span>
+                                <span class="hs-tag">firmware</span>
+                                <span class="hs-tag">control systems</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-content">
-                    <img src="https://avatars.githubusercontent.com/u/24755365?v=4" alt="" class="round-image inline">
-                    <div class="inline infobox">
-                        <p>
-                            <h2>About me:</h2>
-                        </p>
-                        <p>
-                            I'm a 24 year old developer from Oslo. I'm interested in programming, and electronics.
-                        </p>
-                        <p>
-                            <h2>Socials:</h2>
-                            <div class="social inline">
-                                <a href="https://github.com/Slenderman00">
-                                    <h2>
-                                        <i class="fa fa-github" aria-hidden="true"></i> <element id="github">Github</element>
-                                    </h2>
-                                </a>
+
+                <div class="hs-section-inner">
+                    <div class="hs-client">
+                        <div class="hs-client-left">
+                            <div class="hs-client-name">Axess Group</div>
+                            <div class="hs-client-status">OFFSHORE ENERGY</div>
+                        </div>
+                        <div class="hs-client-right">
+                            <div class="hs-client-desc">Component-level repair and PCB diagnostics on industrial ultrasound equipment used for offshore inspection.</div>
+                            <div class="hs-client-tags">
+                                <span class="hs-tag">repair</span>
+                                <span class="hs-tag">PCB design</span>
+                                <span class="hs-tag">industrial ultrasound</span>
                             </div>
-                            <div class="social inline">
-                                <a href="https://matrix.to/#/@joar:matrix.joar.me">
-                                    <h2>
-                                        <i class="fa fa-matrix-org" aria-hidden="true"></i>
-                                        <element id="matrix">@Joar:matrix.joar.me</element>
-                                    </h2>
-                                </a>
-                            </div>
-                            <div class="social-bottom inline">
-                                <a href="mailto://contact@joar.me">
-                                    <h2>
-                                        <i class="fa fa-envelope" aria-hidden="true"></i> Contact@joar.me
-                                    </h2>
-                                </a>
-                            </div>
-                            <div class="social-bottom inline">
-                                <a href="https://bsky.app/profile/joar.me">
-                                    <h2>
-                                        <i class="bluesky"></i> @Joar.me
-                                    </h2>
-                                </a>
-                            </div>
-                        </p>
-                        
+                        </div>
                     </div>
                 </div>
-                <div id="index-container">
+
+                <div class="hs-section-inner">
+                    <div class="hs-client">
+                        <div class="hs-client-left">
+                            <div class="hs-client-name">University of Troms&oslash;</div>
+                            <div class="hs-client-status">NETWORKING</div>
+                        </div>
+                        <div class="hs-client-right">
+                            <div class="hs-client-desc">Local tooling and development around Network Administration Visualized (NAV), with contributions merged into the NAV main branch.</div>
+                            <div class="hs-client-tags">
+                                <span class="hs-tag">firmware</span>
+                                <span class="hs-tag">networking</span>
+                                <span class="hs-tag">data plane</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div id="timeline">
+            </section>
+
+            <section id="lab" class="hs-lab">
+                <div class="hs-section-inner">
+                    <h2 class="hs-section-title">The lab</h2>
+                </div>
+                <div class="hs-section-inner">
+                    <div class="hs-lab-photo hs-photo" style="background-image:url('lab-bench.jpg')"></div>
+                </div>
+                <div class="hs-section-inner">
+                    <div class="hs-lab-label">IN-HOUSE</div>
+
+                    <div class="hs-lab-row">
+                        <div class="hs-lab-text">Everything gets prototyped and tested here before it goes anywhere near a client's boat, platform, or network. No third-party lab, no waiting on someone else's bench time.</div>
+                        <div class="hs-lab-image hs-photo" style="background-image:url('personal-project.jpg')"></div>
+                    </div>
+
+                    <div class="hs-lab-row">
+                        <div class="hs-lab-image hs-photo" style="background-image:url('rto1024.jpg')"></div>
+                        <div class="hs-lab-text">Our flagship scope, a Rohde &amp; Schwarz RTO1024, lets us take on state-of-the-art telecommunications work: measuring high-bandwidth differential pairs in real time, down to the signal integrity of individual lanes.</div>
+                    </div>
+
+                    <div class="hs-lab-row">
+                        <div class="hs-lab-text">Through our automated test setups we can recreate and measure almost any phenomenon found in the field. That extends to pre-compliance testing, so problems are caught on our bench, not in certification.</div>
+                        <div class="hs-lab-image hs-photo" style="background-image:url('test-bench.jpg')"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="hs-person-section">
+                <div class="hs-section-inner hs-person">
+                    <div class="hs-person-photo-wrap">
+                        <div class="hs-person-photo hs-photo" style="background-image:url('joar-portrait.jpg');background-position:center 10%"></div>
+                        <div class="hs-person-id">
+                            <div class="hs-person-name">Joar Heimonen</div>
+                            <div class="hs-person-role">FOUNDER</div>
+                        </div>
+                    </div>
+                    <div class="hs-person-copy">
+                        <div class="hs-person-headline">Got a board that needs building, or one that needs fixing?</div>
+                        <a href="mailto:contact@joar.me" class="hs-contact-link">contact@joar.me &rarr;</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cofounder" class="hs-person-section hs-person-section-reverse">
+                <div class="hs-section-inner hs-person hs-person-reverse">
+                    <div class="hs-person-photo-wrap">
+                        <div class="hs-person-photo hs-photo" style="background-image:url('aron-portrait.jpg')"></div>
+                        <div class="hs-person-id">
+                            <div class="hs-person-name">Aron Heimonen</div>
+                            <div class="hs-person-role">CO-FOUNDER</div>
+                        </div>
+                    </div>
+                    <div class="hs-person-copy">
+                        <div class="hs-person-headline">Aron runs the commercial side.</div>
+                        <p class="hs-person-bio">Finance, bookkeeping and operations. Holds a degree in finance and a seat on the board.</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="hs-footer">
+                <div>HEIMONEN SOLUTIONS AS</div>
+                <div>ORG.NR 938 067 937</div>
+            </footer>
+
         </div>
     </body>
 </html>

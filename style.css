@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
 
 html {
     -webkit-text-size-adjust: none;
@@ -49,6 +49,7 @@ body {
     top: 20px;
     width: 100%;
     font-size: 80px;
+    text-align: center;
     user-select: none;
 }
 
@@ -339,4 +340,374 @@ pre.mermaid .edgeLabel {
 
 pre.mermaid .cluster text {
   fill: #f8f8f2;
+}
+
+/* ===========================================================
+   Heimonen Solutions AS — business site (index.html)
+   =========================================================== */
+
+body.hs {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.hs-page {
+    position: relative;
+    z-index: 1;
+    color: #FFFAFA;
+}
+
+.hs-page a {
+    color: #FFFAFA;
+}
+
+.hs-section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hs-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 20px 0;
+}
+
+.hs-nav-mark {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+}
+
+.hs-nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.hs-nav-links a {
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.hs-nav-links a:hover {
+    text-decoration: underline;
+}
+
+.hs-hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 120px 20px 60px;
+}
+
+.hs-eyebrow {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #838381;
+    margin-bottom: 20px;
+}
+
+.hs-headline {
+    font-size: 84px;
+    line-height: 0.98;
+    max-width: 940px;
+    letter-spacing: -1px;
+    margin: 0;
+}
+
+.hs-subhead {
+    font-size: 22px;
+    color: #838381;
+    margin-top: 28px;
+    max-width: 640px;
+}
+
+.hs-capabilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 44px;
+}
+
+.hs-capabilities span {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    color: #FFFAFA;
+    padding-right: 18px;
+    margin-right: 18px;
+    position: relative;
+}
+
+.hs-capabilities span:not(:last-child)::after {
+    content: "/";
+    position: absolute;
+    right: -11px;
+    color: #494949;
+}
+
+.hs-section-title {
+    font-size: 40px;
+    margin: 0;
+}
+
+.hs-services {
+    background: #FFFAFA;
+    color: #000000;
+}
+
+.hs-services .hs-section-inner {
+    padding: 80px 20px 60px;
+}
+
+.hs-services .hs-section-title {
+    margin-bottom: 44px;
+}
+
+.hs-services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #494949;
+}
+
+.hs-service {
+    background: #FFFAFA;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 180px;
+}
+
+.hs-service-num {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 15px;
+    color: #838381;
+}
+
+.hs-service-title {
+    font-size: 24px;
+    line-height: 1.15;
+}
+
+.hs-service-desc {
+    font-size: 17px;
+    line-height: 1.5;
+    color: #000000;
+}
+
+.hs-service-wide {
+    grid-column: 1 / -1;
+}
+
+.hs-service-desc-wide {
+    max-width: 60%;
+}
+
+.hs-clients {
+    padding-top: 20px;
+}
+
+.hs-clients-heading {
+    padding-top: 90px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.hs-client {
+    background: #FFFAFA;
+    color: #000000;
+    padding: 36px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    display: grid;
+    grid-template-columns: minmax(220px, 300px) 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.hs-client:hover {
+    cursor: default;
+    border-left: 5px solid #0a0908;
+    border-right: 5px solid #0a0908;
+    background: #fffafad7;
+}
+
+.hs-client-name {
+    font-size: 30px;
+    line-height: 1.05;
+}
+
+.hs-client-status {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    color: #838381;
+    margin-top: 10px;
+}
+
+.hs-client-desc {
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.hs-client-tags {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hs-tag {
+    background: #0A0908;
+    color: #FFFAFA;
+    font-size: 12px;
+    padding: 4px 9px;
+    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.hs-lab {
+    padding-top: 70px;
+}
+
+.hs-lab .hs-section-title {
+    margin-bottom: 30px;
+}
+
+.hs-lab-photo {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    border-radius: 5px;
+}
+
+.hs-lab-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    color: #838381;
+    margin-top: 20px;
+}
+
+.hs-lab-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.hs-lab-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #FFFAFA;
+}
+
+.hs-lab-image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    border-radius: 5px;
+}
+
+.hs-person-section {
+    padding-top: 110px;
+    padding-bottom: 60px;
+}
+
+.hs-person-section-reverse {
+    padding-top: 20px;
+}
+
+.hs-person {
+    display: flex;
+    gap: 64px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hs-person-reverse {
+    flex-direction: row-reverse;
+}
+
+.hs-person-photo-wrap {
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.hs-person-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+}
+
+.hs-person-id {
+    text-align: center;
+}
+
+.hs-person-name {
+    font-size: 18px;
+}
+
+.hs-person-role {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #838381;
+    margin-top: 6px;
+}
+
+.hs-person-copy {
+    flex: 0 1 640px;
+}
+
+.hs-person-headline {
+    font-size: 56px;
+    line-height: 1.05;
+    max-width: 760px;
+}
+
+.hs-person-bio {
+    font-size: 22px;
+    color: #838381;
+    margin-top: 28px;
+    max-width: 640px;
+}
+
+.hs-contact-link {
+    display: inline-block;
+    margin-top: 36px;
+    font-size: 32px;
+    text-decoration: none;
+}
+
+.hs-contact-link:hover {
+    text-decoration: underline;
+}
+
+.hs-footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    color: #838381;
+}
+
+.hs-photo {
+    background-color: #0A0908;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
