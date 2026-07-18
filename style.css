@@ -705,6 +705,15 @@ body.hs {
     color: #838381;
 }
 
+.hs-footer .hs-footer-blog-link {
+    color: #838381;
+    text-decoration: none;
+}
+
+.hs-footer-blog-link:hover {
+    text-decoration: underline;
+}
+
 .hs-photo {
     background-color: #0A0908;
     background-size: cover;
