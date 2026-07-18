@@ -9,15 +9,6 @@ class Edge {
 
         this.lifetime = 0;
     }
-
-    draw(ctx) {
-        //the lower the less transparent the line is
-        ctx.globalAlpha = 1 - this.lifetime / 20;
-        ctx.beginPath();
-        ctx.moveTo(this.node1.posx, this.node1.posy);
-        ctx.lineTo(this.node2.posx, this.node2.posy);
-        ctx.stroke();
-    }
 }
 
 class Node {
@@ -29,8 +20,8 @@ class Node {
     }
 
     drift(width, height) {
-        this.momentumx += random(-0.05, 0.05);
-        this.momentumy += random(-0.05, 0.05);
+        this.momentumx += random(-0.06, 0.06);
+        this.momentumy += random(-0.06, 0.06);
         this.posx += this.momentumx;
         this.posy += this.momentumy;
 
@@ -125,8 +116,8 @@ class Nodes {
             let distanceToMouse = this.getDistanceToMouse(node);
             if (distanceToMouse < 100) {
                 let angle = Math.atan2(node.posy - this.mousePos.y, node.posx - this.mousePos.x);
-                node.momentumx += Math.cos(angle) * 10;
-                node.momentumy += Math.sin(angle) * 10;
+                node.momentumx += Math.cos(angle) * 12;
+                node.momentumy += Math.sin(angle) * 12;
             }
         }
 
@@ -150,7 +141,9 @@ class Nodes {
     }
 
     getDistanceToMouse(node) {
-        return Math.sqrt(Math.pow(node.posx - this.mousePos.x, 2) + Math.pow(node.posy - this.mousePos.y, 2));
+        const dx = node.posx - this.mousePos.x;
+        const dy = node.posy - this.mousePos.y;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
     getClosestNodes(node, numNodes) {
@@ -159,11 +152,16 @@ class Nodes {
             closestNodes.push(this.nodes[i]);
         }
         for (let i = numNodes; i < this.nodes.length; i++) {
-            let dist = Math.sqrt(Math.pow(node.posx - this.nodes[i].posx, 2) + Math.pow(node.posy - this.nodes[i].posy, 2));
+            const other = this.nodes[i];
+            const odx = node.posx - other.posx;
+            const ody = node.posy - other.posy;
+            let dist = Math.sqrt(odx * odx + ody * ody);
             let maxDist = 0;
             let maxDistIndex = 0;
             for (let j = 0; j < closestNodes.length; j++) {
-                let dist2 = Math.sqrt(Math.pow(node.posx - closestNodes[j].posx, 2) + Math.pow(node.posy - closestNodes[j].posy, 2));
+                const cdx = node.posx - closestNodes[j].posx;
+                const cdy = node.posy - closestNodes[j].posy;
+                let dist2 = Math.sqrt(cdx * cdx + cdy * cdy);
                 if (dist2 > maxDist) {
                     maxDist = dist2;
                     maxDistIndex = j;
@@ -176,22 +174,31 @@ class Nodes {
         return closestNodes;
     }
 
+    //shuffles nodes in place so different edges get a chance to form next time
+    shuffleNodes() {
+        for (let i = this.nodes.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const tmp = this.nodes[i];
+            this.nodes[i] = this.nodes[j];
+            this.nodes[j] = tmp;
+        }
+    }
+
     draw() {
-        //we shuffle all the nodes to make certain different edges are created next time
-        this.nodes = this.nodes.sort((a, b) => 0.5 - Math.random());
-        
-        this.ctx.beginPath();
+        this.shuffleNodes();
+
         for (let node of this.nodes) {
             //this.ctx.moveTo(node.posx, node.posy);
             //this.ctx.arc(node.posx, node.posy, 1, 0, 2 * Math.PI);
 
             let distanceToMouse = this.getDistanceToMouse(node);
             let range = 11 - Math.floor(distanceToMouse / 100);
-            //make sure range is at least 1
+
+            // too far from the mouse to be part of any visible edge, skip entirely
             if (range < 1) {
-                range = 1;
+                continue;
             }
-            
+
             let closestNodes = this.getClosestNodes(node, range);
 
             for (let closestNode of closestNodes) {
@@ -203,25 +210,49 @@ class Nodes {
 
         }
 
+        // group edges by lifetime (== alpha) so we issue one stroke() per
+        // alpha level instead of one per edge (same line color/alpha/position,
+        // far fewer draw calls)
+        const buckets = new Map();
         for (let edge of this.edges) {
-            edge.draw(this.ctx);
+            let bucket = buckets.get(edge.lifetime);
+            if (!bucket) {
+                bucket = [];
+                buckets.set(edge.lifetime, bucket);
+            }
+            bucket.push(edge);
         }
 
         this.ctx.strokeStyle = "#494949";
-        this.ctx.stroke();
+        for (let [lifetime, edgesInBucket] of buckets) {
+            this.ctx.globalAlpha = 1 - lifetime / 20;
+            this.ctx.beginPath();
+            for (let edge of edgesInBucket) {
+                this.ctx.moveTo(edge.node1.posx, edge.node1.posy);
+                this.ctx.lineTo(edge.node2.posx, edge.node2.posy);
+            }
+            this.ctx.stroke();
+        }
     }
 
 
     start() {
-        const animate = () => {
-            this.drift(this.canvas.width, this.canvas.height);
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.draw();
+        // cap the simulation + render rate to 35fps
+        const frameInterval = 1000 / 35;
+        let lastFrameTime = 0;
+
+        const animate = (timestamp) => {
+            if (timestamp - lastFrameTime >= frameInterval) {
+                lastFrameTime = timestamp;
+                this.drift(this.canvas.width, this.canvas.height);
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.draw();
+            }
             requestAnimationFrame(animate);
         };
 
         if (!this.stopped) {
-            animate();
+            requestAnimationFrame(animate);
         }
     }
 

@@ -13,10 +13,25 @@ initHsBackground = () => {
     let scaleX = canvas.width / canvasRect.width;
     let scaleY = canvas.height / canvasRect.height;
 
+    let pendingMouse = null;
+    let mouseMoveScheduled = false;
+
+    let flushMouseMove = () => {
+        mouseMoveScheduled = false;
+        if (pendingMouse) {
+            hsWorker.postMessage({mouse: pendingMouse, click: false, canvas: null });
+            pendingMouse = null;
+        }
+    }
+
     let mouseMove = (e) => {
         const x = (e.clientX - canvasRect.left) * scaleX;
         const y = (e.clientY - canvasRect.top) * scaleY;
-        hsWorker.postMessage({mouse: {x: x, y: y}, click: false, canvas: null });
+        pendingMouse = {x: x, y: y};
+        if (!mouseMoveScheduled) {
+            mouseMoveScheduled = true;
+            requestAnimationFrame(flushMouseMove);
+        }
     }
 
     document.addEventListener("mousemove", mouseMove);
