@@ -1,4 +1,28 @@
 let hsWorker;
+let canvasRect;
+let scaleX;
+let scaleY;
+
+let pendingMouse = null;
+let mouseMoveScheduled = false;
+
+let flushMouseMove = () => {
+    mouseMoveScheduled = false;
+    if (pendingMouse) {
+        hsWorker.postMessage({mouse: pendingMouse, click: false, canvas: null });
+        pendingMouse = null;
+    }
+}
+
+let mouseMove = (e) => {
+    const x = (e.clientX - canvasRect.left) * scaleX;
+    const y = (e.clientY - canvasRect.top) * scaleY;
+    pendingMouse = {x: x, y: y};
+    if (!mouseMoveScheduled) {
+        mouseMoveScheduled = true;
+        requestAnimationFrame(flushMouseMove);
+    }
+}
 
 initHsBackground = () => {
     let lcanvas = document.getElementById("canvas");
@@ -9,40 +33,11 @@ initHsBackground = () => {
 
     let canvas = document.getElementById("canvas").transferControlToOffscreen();
 
-    let canvasRect = document.getElementById("canvas").getBoundingClientRect();
-    let scaleX = canvas.width / canvasRect.width;
-    let scaleY = canvas.height / canvasRect.height;
-
-    let pendingMouse = null;
-    let mouseMoveScheduled = false;
-
-    let flushMouseMove = () => {
-        mouseMoveScheduled = false;
-        if (pendingMouse) {
-            hsWorker.postMessage({mouse: pendingMouse, click: false, canvas: null });
-            pendingMouse = null;
-        }
-    }
-
-    let mouseMove = (e) => {
-        const x = (e.clientX - canvasRect.left) * scaleX;
-        const y = (e.clientY - canvasRect.top) * scaleY;
-        pendingMouse = {x: x, y: y};
-        if (!mouseMoveScheduled) {
-            mouseMoveScheduled = true;
-            requestAnimationFrame(flushMouseMove);
-        }
-    }
-
-    document.addEventListener("mousemove", mouseMove);
+    canvasRect = document.getElementById("canvas").getBoundingClientRect();
+    scaleX = canvas.width / canvasRect.width;
+    scaleY = canvas.height / canvasRect.height;
 
     hsWorker.postMessage({mouse: null, click: false, canvas: canvas }, [canvas]);
-
-    document.addEventListener("click", function(e) {
-        if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
-            hsWorker.postMessage({mouse: null, click: true, canvas: null });
-        }
-    });
 
     hsWorker.onmessage = (e) => {
         console.log('Message received from worker');
@@ -52,6 +47,16 @@ initHsBackground = () => {
 
 loadHsBackground = () => {
     initHsBackground();
+
+    // registered once: initHsBackground() reruns on every resize, so listeners
+    // added inside it would stack up instead of replacing the old ones
+    document.addEventListener("mousemove", mouseMove);
+
+    document.addEventListener("click", function(e) {
+        if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
+            hsWorker.postMessage({mouse: null, click: true, canvas: null });
+        }
+    });
 
     window.addEventListener("resize", function() {
         hsWorker.terminate();
