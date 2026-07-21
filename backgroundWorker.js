@@ -210,6 +210,19 @@ class Nodes {
 
         }
 
+        // snap edges that got stretched too far (e.g. by an explosion flinging
+        // their nodes apart) instead of letting them span the whole canvas
+        const maxEdgeLength = 220;
+        const maxEdgeLengthSq = maxEdgeLength * maxEdgeLength;
+        for (let i = this.edges.length - 1; i >= 0; i--) {
+            const edge = this.edges[i];
+            const dx = edge.node1.posx - edge.node2.posx;
+            const dy = edge.node1.posy - edge.node2.posy;
+            if (dx * dx + dy * dy > maxEdgeLengthSq) {
+                this.edges.splice(i, 1);
+            }
+        }
+
         // group edges by lifetime (== alpha) so we issue one stroke() per
         // alpha level instead of one per edge (same line color/alpha/position,
         // far fewer draw calls)
