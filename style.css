@@ -436,15 +436,11 @@ body.hs {
     font-family: 'Roboto Mono', monospace;
     font-size: 13px;
     color: #FFFAFA;
-    padding-right: 18px;
-    margin-right: 18px;
-    position: relative;
 }
 
 .hs-capabilities span:not(:last-child)::after {
     content: "/";
-    position: absolute;
-    right: -11px;
+    margin: 0 18px;
     color: #494949;
 }
 
@@ -719,4 +715,115 @@ body.hs {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+/* ===========================================================
+   Heimonen Solutions AS — responsive (tablet + phone)
+   =========================================================== */
+
+@media (max-width: 900px) {
+    .hs-headline {
+        font-size: 64px;
+    }
+
+    .hs-person-headline {
+        font-size: 46px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hs-nav {
+        flex-wrap: wrap;
+        row-gap: 14px;
+    }
+
+    .hs-nav-mark {
+        font-size: 22px;
+    }
+
+    .hs-nav-links {
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .hs-hero {
+        padding-top: 90px;
+    }
+
+    .hs-headline {
+        font-size: 44px;
+        letter-spacing: -0.5px;
+    }
+
+    .hs-subhead {
+        font-size: 18px;
+    }
+
+    .hs-section-title {
+        font-size: 30px;
+    }
+
+    .hs-services .hs-section-inner {
+        padding-top: 60px;
+    }
+
+    .hs-services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hs-service-desc-wide {
+        max-width: 100%;
+    }
+
+    .hs-client {
+        grid-template-columns: 1fr;
+        padding: 24px;
+    }
+
+    .hs-client-name {
+        font-size: 26px;
+    }
+
+    .hs-lab-photo {
+        aspect-ratio: 4 / 3;
+    }
+
+    .hs-lab-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .hs-lab-row .hs-lab-image {
+        order: 1;
+    }
+
+    .hs-lab-row .hs-lab-text {
+        order: 2;
+    }
+
+    .hs-person {
+        gap: 32px;
+    }
+
+    .hs-person-photo {
+        width: 160px;
+        height: 160px;
+        flex-shrink: 0;
+    }
+
+    .hs-person-photo-wrap {
+        width: 160px;
+    }
+
+    .hs-person-headline {
+        font-size: 32px;
+    }
+
+    .hs-person-bio {
+        font-size: 18px;
+    }
+
+    .hs-contact-link {
+        font-size: 24px;
+    }
 }
